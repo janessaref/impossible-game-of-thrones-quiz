@@ -15,3 +15,13 @@ GoT Quiz
     - local storage high score values
     - separate link to view high scores
 */
+
+var startBtn = document.querySelector("#house-sigils");
+
+function startGame() {
+    console.log("game is starting!")
+}
+
+startBtn.addEventListener("click", startGame);
+
+
