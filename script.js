@@ -29,9 +29,13 @@ var triviaQs = {
 }
 
 var startBtn = document.querySelector("#house-sigils");
+var timerEl = document.querySelector("#timer");
+var timerSeconds = document.querySelector("#seconds");
 // var houseBtn = startBtn;
 var triviaBtns = document.getElementById("trivia");
 triviaBtns.style.display= "none";
+
+var secondsLeft = 91;
 
 
 
@@ -44,9 +48,26 @@ function startGame() {
 
    var showTriviaBtn = document.getElementById("trivia");
    showTriviaBtn.style.display = "";
+   
 
 }
 
+function startTimer() {
+    var gameTimer = setInterval(function() {
+        secondsLeft--;
+        timerSeconds.textContent = secondsLeft;
+        if(secondsLeft === 0) {
+          clearInterval(gameTimer);
+          
+        }
+    
+      }, 1000);
+}
+
+    
+
+
 startBtn.addEventListener("click", startGame);
+startBtn.addEventListener("click", startTimer)
 
 
