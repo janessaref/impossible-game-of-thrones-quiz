@@ -26,13 +26,25 @@ var triviaQs = {
     Q8 : "Who created the Night King?",
     Q9 : "What were the three names of Daenerys' dragons?",
     Q10 : "Who is known as the lightning lord?"
-
 }
 
 var startBtn = document.querySelector("#house-sigils");
+// var houseBtn = startBtn;
+var triviaBtns = document.getElementById("trivia");
+triviaBtns.style.display= "none";
+
+
 
 function startGame() {
-    console.log("game is starting!");
+    // var houseBtn = houseHighScore();
+    // houseBtn.text = houseBtn;
+    // console.log(houseBtn);
+   var hideHouseBtn = document.getElementById("house-sigils");
+   hideHouseBtn.style.display = "none";
+
+   var showTriviaBtn = document.getElementById("trivia");
+   showTriviaBtn.style.display = "";
+
 }
 
 startBtn.addEventListener("click", startGame);
