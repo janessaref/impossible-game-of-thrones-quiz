@@ -48,6 +48,14 @@ function startGame() {
 
    var showTriviaBtn = document.getElementById("trivia");
    showTriviaBtn.style.display = "";
+
+   var hideInstructions = document.getElementById("instructions");
+   hideInstructions.style.display="none";
+
+   var triviaQuestions = document.querySelector("h1");
+   triviaQuestions.textContent = triviaQs.Q1;
+
+
    
 
 }
