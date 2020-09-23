@@ -113,6 +113,7 @@ function startGame() {
     // console.log(houseBtn);
    
     triviaQuestions();
+    startTimer();
     // triviaChoices();
    
 
@@ -172,6 +173,9 @@ function startTimer() {
         timerSeconds.textContent = secondsLeft;
         if(secondsLeft === 0) {
           clearInterval(gameTimer);
+          setTimeout(function(){
+              console.log("done");
+          })
           
         }
     
@@ -182,7 +186,6 @@ function startTimer() {
 
 
 startBtn.addEventListener("click", startGame);
-startBtn.addEventListener("click", startTimer);
 startBtn.addEventListener("click", function(){
 
     // var hideHouseBtn = document.getElementById("house-sigils");
@@ -205,14 +208,13 @@ choicesBtns.addEventListener("click", function(event){
 
         if (event.target.textContent === triviaQs[i]["correctA"]) {
             questionNumber++;
-            triviaQuestions();
               console.log("matches");
     
         } else {
             questionNumber++;
-            triviaQuestions();
-            
+            secondsLeft = secondsLeft - 5;
         }
+        triviaQuestions();
 
     }
     
