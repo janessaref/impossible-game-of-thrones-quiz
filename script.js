@@ -80,10 +80,6 @@ triviaBox.style.visibility="hidden";
 
 
 
-
-
-
-
 function startGame() {
     // var houseBtn = houseHighScore();
     // houseBtn.text = houseBtn;
