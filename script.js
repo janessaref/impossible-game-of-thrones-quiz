@@ -15,18 +15,19 @@ GoT Quiz
     - local storage high score values
     - separate link to view high scores
 */
+// array of high scores
 var triviaQs = [
     {
     
     question : ["What were the first words of King Robert Baratheon to Ned Stark in the first episode of season one?"],
 
-    choices: [
+    choices : [
         "You've haven't changed.",
         "You look terrible.",
         "You've aged."
     ],
 
-    correctA : ["You've got fat."],
+    correctA : "You've got fat.",
 
    },
 
@@ -38,7 +39,33 @@ var triviaQs = [
         "Tyrion Lannister"
     ],
 
-    correctA : ["Peter Baelish"],
+    correctA : "Peter Baelish",
+    },
+
+    {
+        question : ["What is the Lannister's official family motto?"],
+
+        choices : [
+            "A Lannister Always Pays His Debts.",
+            "Unbent. Unbowed. Unbroken.",
+            "Growing Strong."
+        ],
+
+        correctA : "Hear Me Roar.",
+
+    },
+
+    {
+        question : ["Who is known as the lightning lord?"],
+
+        choices : [
+            "Stannis Baratheon",
+            "Mance Rayder",
+            "Sir Gregor Clegane"
+        ],
+
+        correctA : "Beric Dondarrion",
+
     },
 ];
 
@@ -52,7 +79,7 @@ var triviaQs = [
 
 // Button variables
 var startBtn = document.querySelector("#house-sigils");
-var choicesBtns = document.querySelector(".trivia-button");
+var choicesBtns = document.querySelector("#trivia");
 var btnA = document.getElementById("button1");
 var btnB = document.getElementById("button2");
 var btnC = document.getElementById("button3");
@@ -93,15 +120,20 @@ function startGame() {
 
 
 function triviaQuestions() {
+    i = questionNumber;
+    // new array to hold all answers
+    // Shuffle array
 
-    var correctAnswer = triviaQs[i].correctA[i];
-    console.log(correctAnswer)
+    var currentQuestion = [...triviaQs[i].choices, triviaQs[i].correctA];  
+    currentQuestion = shuffle(currentQuestion);
+    var correctAnswer = triviaQs[i].correctA;
+    // console.log(correctAnswer)
 
-    triviaQuestion.textContent = triviaQs[i].question[questionNumber];
-    btnA.textContent = triviaQs[i].choices[0];
-    btnB.textContent = triviaQs[i].choices[1];
-    btnC.textContent = triviaQs[i].choices[2];
-    btnD.textContent = triviaQs[i].correctA[0];
+    triviaQuestion.textContent = triviaQs[i].question[0];
+    btnA.textContent = currentQuestion[0];
+    btnB.textContent = currentQuestion[1];
+    btnC.textContent = currentQuestion[2];
+    btnD.textContent = currentQuestion[3];
 
     // if (btnA.textContent !== correctAnswer) {
     //     alert("answer is wrong");
@@ -110,6 +142,11 @@ function triviaQuestions() {
    
 
 };
+
+function shuffle(array) {
+    let shuffled = array.sort(() => Math.random() - 0.5);
+    return shuffled;
+}
 
 
 // function triviaChoices() {
@@ -163,16 +200,22 @@ startBtn.addEventListener("click", function(){
     
 });
 choicesBtns.addEventListener("click", function(event){
+    
+    if (event.target.matches("button")) {
 
-    if(event.target.matches(".trivia-button" === triviaQs[i]["correctA"])) {
-        questionNumber++;
-        triviaQuestions();
-          
-    } else {
-        questionNumber++;
-        triviaQuestions();
-        
+        if (event.target.textContent === triviaQs[i]["correctA"]) {
+            questionNumber++;
+            triviaQuestions();
+              console.log("matches");
+    
+        } else {
+            questionNumber++;
+            triviaQuestions();
+            
+        }
+
     }
+    
 
     // questionNumber++;
    
