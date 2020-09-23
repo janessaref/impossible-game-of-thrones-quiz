@@ -97,13 +97,18 @@ var secondsLeft = 61;
 // Container variables
 var startMenu = document.getElementById("cardbox-start");
 var triviaBox = document.getElementById("cardbox-trivia");
-triviaBox.style.visibility = "hidden";
+// triviaBox.style.visibility = "hidden";
+triviaBox.style.display = "none";
+var scoreBox = document.getElementById("cardbox-score");
+// scoreBox.style.visibility = "hidden";
+scoreBox.style.display = "none";
 
 // Correct/wrong variables
 var correctIncorrect = ["Correct!", "Incorrect!"];
 var correctWrong = document.querySelector("#correct-wrong");
 
-
+// Scores variables
+var highScoreBtn = document.getElementById("highscores");
 
 
 // console.log(correctAnswer)
@@ -154,9 +159,10 @@ function startTimer() {
         if (secondsLeft <= 0) {
             timerSeconds.textContent = 0;
             clearInterval(gameTimer);
-            setTimeout(function () {
-                console.log("done");
-            });
+            // triviaBox.setAttribute("class", "hide");
+            triviaBox.style.display = "none";
+            scoreBox.style.display = "block";
+
 
         }
 
@@ -178,8 +184,8 @@ startBtn.addEventListener("click", function () {
     // var hideInstructions = document.getElementById("instructions");
     // hideInstructions.style.display="none";
 
-    startMenu.setAttribute("class", "hide");
-    triviaBox.style.visibility = "visible";
+    startMenu.style.display = "none";
+    triviaBox.style.display = "block";
 
 
 });
@@ -206,5 +212,7 @@ choicesBtns.addEventListener("click", function (event) {
     }
 
 })
+
+// End of quiz
 
 
