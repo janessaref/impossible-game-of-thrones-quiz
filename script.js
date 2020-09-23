@@ -20,23 +20,29 @@ var triviaQs = [
     
     question : ["What were the first words of King Robert Baratheon to Ned Stark in the first episode of season one?"],
 
-//     choices: {
-//         fake: "You've haven't changed.",
-//         correct: "You've got fat.",
-//         fake: "You look terrible.",
-//         fake: "You've aged."
-//    } 
-},
+    choices: [
+        "You've haven't changed.",
+        "You look terrible.",
+        "You've aged."
+    ],
 
-    // question : ["Who said \"Chaos isn't a pit. Chaos is a ladder.\"?"],
-    // choices : {
-    // correct: "Peter Baelish",
-    // fake : "Vaerys",
-    // fake : "Cersei Lannister",
-    // fake : "Tyrion Lannister",
-    // }
+    correctA : ["You've got fat."],
+
+   },
+
+    {
+    question : ["Who said \"Chaos isn't a pit. Chaos is a ladder.\"?"],
+    choices : [ 
+        "Vaerys",
+        "Cersei Lannister",
+        "Tyrion Lannister"
+    ],
+
+    correctA : ["Peter Baelish"],
+    },
 ];
 
+// console.log(triviaQs[0].correctA[0]);
 
 // var correctIncorrect = ["Correct", "Incorrect"]
 // var correctWrong = document.querySelector("#correct-wrong")
@@ -44,23 +50,37 @@ var triviaQs = [
 // var triviaBtns = document.getElementById("trivia");
 // triviaBtns.style.display= "none";
 
+// Button variables
 var startBtn = document.querySelector("#house-sigils");
 var choicesBtns = document.querySelector(".trivia-button");
-var triviaQuestion = document.querySelector("#tq");
-var timerEl = document.querySelector("#timer");
-var timerSeconds = document.querySelector("#seconds");
-var startMenu = document.getElementById("cardbox-start");
-var triviaBox = document.getElementById("cardbox-trivia");
-triviaBox.style.visibility="hidden";
 var btnA = document.getElementById("button1");
 var btnB = document.getElementById("button2");
 var btnC = document.getElementById("button3");
 var btnD = document.getElementById("button4");
-// triviaBox.setAttribute("class","hide");
 
-var secondsLeft = 91;
+// Question variables
+var triviaQuestion = document.querySelector("#tq");
 var questionNumber = 0;
 var i = 0;
+
+// Timer variables
+var timerEl = document.querySelector("#timer");
+var timerSeconds = document.querySelector("#seconds");
+var secondsLeft = 61;
+
+// Container variables
+var startMenu = document.getElementById("cardbox-start");
+var triviaBox = document.getElementById("cardbox-trivia");
+triviaBox.style.visibility="hidden";
+
+
+
+// console.log(correctAnswer)
+// triviaBox.setAttribute("class","hide");
+
+
+
+
 
 
 
@@ -68,8 +88,6 @@ function startGame() {
     // var houseBtn = houseHighScore();
     // houseBtn.text = houseBtn;
     // console.log(houseBtn);
-  
-
    
     triviaQuestions();
     // triviaChoices();
@@ -79,14 +97,24 @@ function startGame() {
 
 
 function triviaQuestions() {
-    // var choicesStr = choices.toString();
-    
+
+    var correctAnswer = triviaQs[i].correctA[i];
+    console.log(correctAnswer)
+
     triviaQuestion.textContent = triviaQs[i].question[questionNumber];
-    // btnA.textContent = triviaQs
+    btnA.textContent = triviaQs[i].choices[0];
+    btnB.textContent = triviaQs[i].choices[1];
+    btnC.textContent = triviaQs[i].choices[2];
+    btnD.textContent = triviaQs[i].correctA[0];
+
+    // if (btnA.textContent !== correctAnswer) {
+    //     alert("answer is wrong");
+    //     }
     
    
 
 };
+
 
 // function triviaChoices() {
 //     var triviaChoiceA = document.getElementById("button1");
@@ -140,12 +168,18 @@ startBtn.addEventListener("click", function(){
 });
 choicesBtns.addEventListener("click", function(event){
 
-    if(event.target.matches("button")) {
-        console.log ("it works")
-    };
+    if(event.target.matches(".trivia-button" === triviaQs[i]["correctA"])) {
+        questionNumber++;
+        triviaQuestions();
+          
+    } else {
+        questionNumber++;
+        triviaQuestions();
+        
+    }
 
-    questionNumber++;
-    triviaQuestions();
+    // questionNumber++;
+   
 })
 
 
