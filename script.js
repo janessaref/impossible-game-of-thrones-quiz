@@ -28,6 +28,13 @@ var triviaQs = {
     Q10 : "Who is known as the lightning lord?"
 }
 
+var triviaAs = ["You haven't changed."]
+var triviaBs = ["You've got fat."]
+var triviaCs = ["You look terrible."]
+var triviaDs = ["You've aged."]
+
+var correctWrong = document.querySelector("#correct-wrong")
+
 var startBtn = document.querySelector("#house-sigils");
 var timerEl = document.querySelector("#timer");
 var timerSeconds = document.querySelector("#seconds");
@@ -37,7 +44,7 @@ triviaBtns.style.display= "none";
 
 var secondsLeft = 91;
 
-
+var correctIncorrect = ["Correct", "Incorrect"]
 
 function startGame() {
     // var houseBtn = houseHighScore();
@@ -51,13 +58,34 @@ function startGame() {
 
    var hideInstructions = document.getElementById("instructions");
    hideInstructions.style.display="none";
-
-   var triviaQuestions = document.querySelector("h1");
-   triviaQuestions.textContent = triviaQs.Q1;
-
-
+   
+    triviaQuestions();
+    triviaChoices();
    
 
+}
+
+
+function triviaQuestions() {
+    var triviaQuestion = document.querySelector("h1");
+    triviaQuestion.textContent = triviaQs.Q1; 
+}
+
+function triviaChoices() {
+    var triviaChoiceA = document.getElementById("button1");
+    triviaChoiceA.textContent = triviaAs;
+
+    triviaChoiceA.addEventListener("click", function(){
+        if(triviaChoiceA) {
+            correctWrong.textContent = "Correct!";
+        } else {
+            correctWrong.textContent = "Wrong!";
+            secondsLeft = secondsLeft - 10;
+        }
+
+    })
+
+    
 }
 
 function startTimer() {

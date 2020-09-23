@@ -1,3 +1,21 @@
+
+body {
+    /* color: white; */
+    border: thin;
+    border-color: white;
+    background-image: url('./assets/ironthrone.jpg');
+    background-repeat: no-repeat;
+    opacity: .9;
+}
+
+
+#cardbox {
+    
+    /* background: #fff; */
+    /* background: transparent; */
+    
+}  
+
 #trivia {
     list-style-type: none;
 }
