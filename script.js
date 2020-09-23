@@ -18,61 +18,60 @@ GoT Quiz
 // array of high scores
 var triviaQs = [
     {
-    
-    question : ["What were the first words of King Robert Baratheon to Ned Stark in the first episode of season one?"],
 
-    choices : [
-        "You've haven't changed.",
-        "You look terrible.",
-        "You've aged."
-    ],
+        question: ["What were the first words of King Robert Baratheon to Ned Stark in the first episode of season one?"],
 
-    correctA : "You've got fat.",
+        choices: [
+            "You've haven't changed.",
+            "You look terrible.",
+            "You've aged."
+        ],
 
-   },
+        correctA: "You've got fat.",
 
-    {
-    question : ["Who said \"Chaos isn't a pit. Chaos is a ladder.\"?"],
-    choices : [ 
-        "Vaerys",
-        "Cersei Lannister",
-        "Tyrion Lannister"
-    ],
-
-    correctA : "Peter Baelish",
     },
 
     {
-        question : ["What is the Lannister's official family motto?"],
+        question: ["Who said \"Chaos isn't a pit. Chaos is a ladder.\"?"],
+        choices: [
+            "Vaerys",
+            "Cersei Lannister",
+            "Tyrion Lannister"
+        ],
 
-        choices : [
+        correctA: "Peter Baelish",
+    },
+
+    {
+        question: ["What is the Lannister's official family motto?"],
+
+        choices: [
             "A Lannister Always Pays His Debts.",
             "Unbent. Unbowed. Unbroken.",
             "Growing Strong."
         ],
 
-        correctA : "Hear Me Roar.",
+        correctA: "Hear Me Roar.",
 
     },
 
     {
-        question : ["Who is known as the lightning lord?"],
+        question: ["Who is known as the lightning lord?"],
 
-        choices : [
+        choices: [
             "Stannis Baratheon",
             "Mance Rayder",
             "Sir Gregor Clegane"
         ],
 
-        correctA : "Beric Dondarrion",
+        correctA: "Beric Dondarrion",
 
     },
 ];
 
-// console.log(triviaQs[0].correctA[0]);
 
-// var correctIncorrect = ["Correct", "Incorrect"]
-// var correctWrong = document.querySelector("#correct-wrong")
+
+
 // var houseBtn = startBtn;
 // var triviaBtns = document.getElementById("trivia");
 // triviaBtns.style.display= "none";
@@ -98,7 +97,12 @@ var secondsLeft = 61;
 // Container variables
 var startMenu = document.getElementById("cardbox-start");
 var triviaBox = document.getElementById("cardbox-trivia");
-triviaBox.style.visibility="hidden";
+triviaBox.style.visibility = "hidden";
+
+// Correct/wrong variables
+var correctIncorrect = ["Correct!", "Incorrect!"];
+var correctWrong = document.querySelector("#correct-wrong");
+
 
 
 
@@ -111,11 +115,10 @@ function startGame() {
     // var houseBtn = houseHighScore();
     // houseBtn.text = houseBtn;
     // console.log(houseBtn);
-   
+
     triviaQuestions();
     startTimer();
-    // triviaChoices();
-   
+
 
 };
 
@@ -125,9 +128,9 @@ function triviaQuestions() {
     // new array to hold all answers
     // Shuffle array
 
-    var currentQuestion = [...triviaQs[i].choices, triviaQs[i].correctA];  
+    var currentQuestion = [...triviaQs[i].choices, triviaQs[i].correctA];
     currentQuestion = shuffle(currentQuestion);
-    var correctAnswer = triviaQs[i].correctA;
+    // var correctAnswer = triviaQs[i].correctA;
     // console.log(correctAnswer)
 
     triviaQuestion.textContent = triviaQs[i].question[0];
@@ -136,11 +139,6 @@ function triviaQuestions() {
     btnC.textContent = currentQuestion[2];
     btnD.textContent = currentQuestion[3];
 
-    // if (btnA.textContent !== correctAnswer) {
-    //     alert("answer is wrong");
-    //     }
-    
-   
 
 };
 
@@ -149,78 +147,64 @@ function shuffle(array) {
     return shuffled;
 }
 
-
-// function triviaChoices() {
-//     var triviaChoiceA = document.getElementById("button1");
-//     triviaChoiceA.textContent = triviaAs;
-
-//     triviaChoiceA.addEventListener("click", function(){
-//         if(triviaChoiceA) {
-//             correctWrong.textContent = "Correct!";
-//         } else {
-//             correctWrong.textContent = "Wrong!";
-//             secondsLeft = secondsLeft - 10;
-//         }
-
-//     })
-
-    
-// }
-
 function startTimer() {
-    var gameTimer = setInterval(function() {
+    var gameTimer = setInterval(function () {
         secondsLeft--;
         timerSeconds.textContent = secondsLeft;
-        if(secondsLeft === 0) {
-          clearInterval(gameTimer);
-          setTimeout(function(){
-              console.log("done");
-          })
-          
+        if (secondsLeft <= 0) {
+            timerSeconds.textContent = 0;
+            clearInterval(gameTimer);
+            setTimeout(function () {
+                console.log("done");
+            });
+
         }
-    
-      }, 1000);
+
+    }, 1000);
 }
 
-    
+
 
 
 startBtn.addEventListener("click", startGame);
-startBtn.addEventListener("click", function(){
+startBtn.addEventListener("click", function () {
 
     // var hideHouseBtn = document.getElementById("house-sigils");
     // hideHouseBtn.style.display = "none";
- 
+
     // var showTriviaBtn = document.getElementById("trivia");
     // showTriviaBtn.style.display = "";
- 
+
     // var hideInstructions = document.getElementById("instructions");
     // hideInstructions.style.display="none";
-    
-    startMenu.setAttribute("class","hide");
-    triviaBox.style.visibility="visible";
-    
-    
+
+    startMenu.setAttribute("class", "hide");
+    triviaBox.style.visibility = "visible";
+
+
 });
-choicesBtns.addEventListener("click", function(event){
-    
+choicesBtns.addEventListener("click", function (event) {
+
     if (event.target.matches("button")) {
 
         if (event.target.textContent === triviaQs[i]["correctA"]) {
+            correctWrong.textContent = correctIncorrect[0];
+            console.log(correctWrong)
             questionNumber++;
-              console.log("matches");
-    
+            secondsLeft = secondsLeft + 5;
+            console.log("matches");
+
         } else {
+            correctWrong.textContent = correctIncorrect[1];
             questionNumber++;
             secondsLeft = secondsLeft - 5;
+
+
         }
         triviaQuestions();
 
     }
-    
 
-    // questionNumber++;
-   
 })
 
 
