@@ -15,78 +15,95 @@ GoT Quiz
     - local storage high score values
     - separate link to view high scores
 */
-var triviaQs = {
-    Q1 : "What were the first words of King Robert Baratheon to Ned Stark in the first episode of season one?",
-    Q2 : "Who said \"Chaos isn't a pit. Chaos is a ladder\".?",
-    Q3 : "What is the Lannister's official family motto?",
-    Q4 : "Who did King Joffrey use as target practice for his crossbow?",
-    Q5 : "Who said this: \"What do we say to the God of death? Not today\"",
-    Q6 : "What does Daenerys mean when she says \"Shekh ma shieraki anni\" to Khal Drogo?",
-    Q7 : "Where is the house of Black and White, the training temple of the Faceless Men?",
-    Q8 : "Who created the Night King?",
-    Q9 : "What were the three names of Daenerys' dragons?",
-    Q10 : "Who is known as the lightning lord?"
-}
+var triviaQs = [
+    {
+    
+    question : ["What were the first words of King Robert Baratheon to Ned Stark in the first episode of season one?"],
 
-var triviaAs = ["You haven't changed."]
-var triviaBs = ["You've got fat."]
-var triviaCs = ["You look terrible."]
-var triviaDs = ["You've aged."]
+//     choices: {
+//         fake: "You've haven't changed.",
+//         correct: "You've got fat.",
+//         fake: "You look terrible.",
+//         fake: "You've aged."
+//    } 
+},
 
-var correctWrong = document.querySelector("#correct-wrong")
+    // question : ["Who said \"Chaos isn't a pit. Chaos is a ladder.\"?"],
+    // choices : {
+    // correct: "Peter Baelish",
+    // fake : "Vaerys",
+    // fake : "Cersei Lannister",
+    // fake : "Tyrion Lannister",
+    // }
+];
+
+
+// var correctIncorrect = ["Correct", "Incorrect"]
+// var correctWrong = document.querySelector("#correct-wrong")
+// var houseBtn = startBtn;
+// var triviaBtns = document.getElementById("trivia");
+// triviaBtns.style.display= "none";
 
 var startBtn = document.querySelector("#house-sigils");
+var choicesBtns = document.querySelector(".trivia-button");
+var triviaQuestion = document.querySelector("#tq");
 var timerEl = document.querySelector("#timer");
 var timerSeconds = document.querySelector("#seconds");
-// var houseBtn = startBtn;
-var triviaBtns = document.getElementById("trivia");
-triviaBtns.style.display= "none";
+var startMenu = document.getElementById("cardbox-start");
+var triviaBox = document.getElementById("cardbox-trivia");
+triviaBox.style.visibility="hidden";
+var btnA = document.getElementById("button1");
+var btnB = document.getElementById("button2");
+var btnC = document.getElementById("button3");
+var btnD = document.getElementById("button4");
+// triviaBox.setAttribute("class","hide");
 
 var secondsLeft = 91;
+var questionNumber = 0;
+var i = 0;
 
-var correctIncorrect = ["Correct", "Incorrect"]
+
 
 function startGame() {
     // var houseBtn = houseHighScore();
     // houseBtn.text = houseBtn;
     // console.log(houseBtn);
-   var hideHouseBtn = document.getElementById("house-sigils");
-   hideHouseBtn.style.display = "none";
+  
 
-   var showTriviaBtn = document.getElementById("trivia");
-   showTriviaBtn.style.display = "";
-
-   var hideInstructions = document.getElementById("instructions");
-   hideInstructions.style.display="none";
    
     triviaQuestions();
-    triviaChoices();
+    // triviaChoices();
    
 
-}
+};
 
 
 function triviaQuestions() {
-    var triviaQuestion = document.querySelector("h1");
-    triviaQuestion.textContent = triviaQs.Q1; 
-}
+    // var choicesStr = choices.toString();
+    
+    triviaQuestion.textContent = triviaQs[i].question[questionNumber];
+    // btnA.textContent = triviaQs
+    
+   
 
-function triviaChoices() {
-    var triviaChoiceA = document.getElementById("button1");
-    triviaChoiceA.textContent = triviaAs;
+};
 
-    triviaChoiceA.addEventListener("click", function(){
-        if(triviaChoiceA) {
-            correctWrong.textContent = "Correct!";
-        } else {
-            correctWrong.textContent = "Wrong!";
-            secondsLeft = secondsLeft - 10;
-        }
+// function triviaChoices() {
+//     var triviaChoiceA = document.getElementById("button1");
+//     triviaChoiceA.textContent = triviaAs;
 
-    })
+//     triviaChoiceA.addEventListener("click", function(){
+//         if(triviaChoiceA) {
+//             correctWrong.textContent = "Correct!";
+//         } else {
+//             correctWrong.textContent = "Wrong!";
+//             secondsLeft = secondsLeft - 10;
+//         }
+
+//     })
 
     
-}
+// }
 
 function startTimer() {
     var gameTimer = setInterval(function() {
@@ -104,6 +121,31 @@ function startTimer() {
 
 
 startBtn.addEventListener("click", startGame);
-startBtn.addEventListener("click", startTimer)
+startBtn.addEventListener("click", startTimer);
+startBtn.addEventListener("click", function(){
+
+    // var hideHouseBtn = document.getElementById("house-sigils");
+    // hideHouseBtn.style.display = "none";
+ 
+    // var showTriviaBtn = document.getElementById("trivia");
+    // showTriviaBtn.style.display = "";
+ 
+    // var hideInstructions = document.getElementById("instructions");
+    // hideInstructions.style.display="none";
+    
+    startMenu.setAttribute("class","hide");
+    triviaBox.style.visibility="visible";
+    
+    
+});
+choicesBtns.addEventListener("click", function(event){
+
+    if(event.target.matches("button")) {
+        console.log ("it works")
+    };
+
+    questionNumber++;
+    triviaQuestions();
+})
 
 

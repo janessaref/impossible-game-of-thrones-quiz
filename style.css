@@ -9,12 +9,12 @@ body {
 }
 
 
-#cardbox {
+/* #cardbox { */
     
     /* background: #fff; */
     /* background: transparent; */
     
-}  
+/* }   */
 
 #trivia {
     list-style-type: none;
@@ -26,4 +26,8 @@ body {
 #button4 {
     margin-bottom: 20px;
 
+}
+
+.hide {
+    display : none;
 }
