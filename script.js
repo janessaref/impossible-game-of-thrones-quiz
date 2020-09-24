@@ -6,16 +6,16 @@ GoT Quiz
     - score starts at 0
 2. questions
     - event listener 
-    - correct answers: add to score
+    - correct answers: add time to timer
     - incorrect answers: subtract time
     - change to next question
 3. high score 
     - if timer is = 0, stop game and show final score and input initials
     - if player finishes game, show final score and input initials
-    - local storage high score values
-    - separate link to view high scores
+    - display high score values
+    - separate button to view high scores
 */
-// array of high scores
+
 var triviaQs = [
     {
 
@@ -171,8 +171,8 @@ timerSeconds.textContent = secondsLeft;
 // Container variables
 var startMenu = document.getElementById("cardbox-start");
 var triviaBox = document.getElementById("cardbox-trivia");
-triviaBox.style.display = "none";
 var scoreBox = document.getElementById("cardbox-score");
+triviaBox.style.display = "none";
 scoreBox.style.display = "none";
 
 // Correct/wrong variables
@@ -181,12 +181,15 @@ var correctWrong = document.querySelector("#correct-wrong");
 
 // Scores variables
 var highScoreBtn = document.getElementById("highscores");
+var scoreModal = document.querySelector(".scoremodal");
 var finalScore = document.getElementById("score");
 var submitScore = document.querySelector(".submit");
 var inputInitials = document.querySelector(".inputname");
-var scoreForm = document.querySelector("#score-form");
+var clearScore = document.getElementById("clear");
+var scoreList = document.querySelector("#scoreboard");
 
 
+// Start the game
 function startGame() {
 
     startMenu.style.display = "none";
@@ -196,16 +199,13 @@ function startGame() {
     startTimer();
 };
 
-
+// Function goes through the triviaQs 
 function triviaQuestions() {
     i = questionNumber;
-    // new array to hold all answers
-    // Shuffle array
 
+    // Array that holds the multiple choice to be shuffled
     var currentQuestion = [...triviaQs[i].choices, triviaQs[i].correctA];
     currentQuestion = shuffle(currentQuestion);
-    // var correctAnswer = triviaQs[i].correctA;
-    // console.log(correctAnswer)
 
     triviaQuestion.textContent = triviaQs[i].question[0];
     btnA.textContent = currentQuestion[0];
@@ -233,18 +233,17 @@ function startTimer() {
     var gameTimer = setInterval(function () {
         secondsLeft--;
         timerSeconds.textContent = secondsLeft;
+
         if (secondsLeft <= 0) {
             timerSeconds.textContent = 0;
+            finalScore.textContent = secondsLeft;
             clearInterval(gameTimer);
             triviaBox.style.display = "none";
             scoreBox.style.display = "block";
-        }
+        };
         if (questionNumber == 10) {
-            clearInterval(gameTimer);
             finalScore.textContent = secondsLeft;
-            if (secondsLeft === 0) {
-                finalScore.textContent = "Sorry! Time is up!";
-            }
+            clearInterval(gameTimer);
             triviaBox.style.display = "none";
             scoreBox.style.display = "block";
         }
@@ -264,35 +263,36 @@ choicesBtns.addEventListener("click", function (event) {
         if (event.target.textContent === triviaQs[i]["correctA"]) {
             correctWrong.textContent = correctIncorrect[0];
             correctWrong.style.color = "green";
-            console.log(correctWrong)
             secondsLeft = secondsLeft + 5;
-            console.log("matches");
 
         } else {
             correctWrong.textContent = correctIncorrect[1];
             correctWrong.style.color = "red";
             secondsLeft = secondsLeft - 5;
+        };
 
-
-        }
         questionNumber++;
         if (questionNumber == 10) {
             endQuiz();
         } else {
             triviaQuestions();
-        }
+        };
 
 
-    }
+    };
 
 });
 
 
-
+// Array for high scores
 var initialsVal = [];
 
-// init();
-var scoreList = document.querySelector("#scoreboard");
+
+
+clearScore.addEventListener("click", function () {
+    scoreList.innerHTML = "";
+    initialsVal = [];
+});
 
 
 function renderScore() {
@@ -303,12 +303,9 @@ function renderScore() {
 
         var li = document.createElement("li");
         li.textContent = userScore;
-        // li.setAttribute("data-index", j);
         scoreList.appendChild(li);
-
-    }
+    };
 };
-
 
 // Event Listener for submit score 
 submitScore.addEventListener("click", function (event) {
@@ -318,12 +315,15 @@ submitScore.addEventListener("click", function (event) {
 
     if (userInput === "") {
         return;
-    }
+    };
+
     initialsVal.push(userInput + " " + secondsLeft);
     inputInitials.value = "";
-    
+
     renderScore();
 
+    submitScore.style.display = "none";
+    inputInitials.style.display = "none";
 });
 
 menuBtn.addEventListener("click", function () {
@@ -331,6 +331,8 @@ menuBtn.addEventListener("click", function () {
     startMenu.style.display = "block";
     triviaBox.style.display = "none";
     scoreBox.style.display = "none";
+    submitScore.style.display = "block";
+    inputInitials.style.display = "block";
 
     questionNumber = 0;
     secondsLeft = 60;

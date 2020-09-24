@@ -18,28 +18,30 @@
 
     <nav class="navbar navbar-light bg-dark">
         <form class="form-inline">
-            <button class="btn btn-outline-danger px-3" type="button" data-toggle="modal" id = "highscores" data-target="#exampleModalCenter">View High Scores</button>
+            <button class="btn btn-outline-danger px-3" type="button" data-toggle="modal" id="highscores"
+                data-target="#exampleModalCenter">View High Scores</button>
 
             <!-- Modal -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">High Scores!</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
-          <button type="button" class="btn btn-primary">Clear High Scores</button>
-        </div>
-      </div>
-    </div>
-  </div>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">High Scores!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body scoremodal">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Go Back</button>
+                            <button type="button" class="btn btn-primary">Clear High Scores</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </form>
 
@@ -64,8 +66,9 @@
         <div class="card-body" id="cardbox">
             <h1 class="card-title">GAME OF THRONES QUIZ</h1>
             <p class="card-text m-5" id="instructions">Do you have what it takes to play for the iron throne? Don’t let
-                the wight walkers beat you to it! This quiz is timed and for every incorrect answer, it will penalize
-                your time by 10 seconds! To start the quiz, choose your house sigil! </p>
+                the white walkers beat you to it! This quiz is timed and for every incorrect answer, it will penalize
+                your time by 5 seconds! For every correct answer, you will get an additonal 5 seconds to your time! Your
+                time left will be your final score. To start the quiz, choose your house sigil! Good luck!</p>
             <ul id="house-sigils">
                 <button type="button" class="btn btn-outline-success" id="start">House Stark</button>
                 <button type="button" class="btn btn-outline-success" id="start">House Lannister</button>
@@ -101,9 +104,8 @@
                         id="button4">Success</button></li>
             </ul>
 
-            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
         </div>
-        <div class="card-footer p-4 text-muted words" id="correct-wrong">Let's go!
+        <div class="card-footer p-4 words" id="correct-wrong">Let's go!
         </div>
     </div>
 
@@ -116,24 +118,22 @@
         <div class="card-body" id="cardbox">
             <h1 class="card-title" id="score">Score</h1>
             <p class="card-text m-5">YOUR FINAL SCORE</p>
-            <ul id= "scoreboard"></ul>
-            <form id ="score-form">
+            <ul id="scoreboard"></ul>
             <div class="input-group mb-3">
                 <input type="text" class="form-control inputname" placeholder="Enter Initials Here"
                     aria-label="Enter Initials Here" aria-describedby="button-addon2">
                 <div class="input-group-append">
-            </form>
                     <button class="btn btn-outline-secondary submit" type="button" id="button-addon2">Submit</button>
                 </div>
             </div>
 
 
-         <!-- Main Menu Button -->
-<button type="button" class="btn btn-outline-primary" id = "goback">
-    Main Menu
-  </button>
-  <button type="button" class="btn btn-outline-danger" id="clear">Clear High Scores</button>
-  
+            <!-- Main Menu Button -->
+            <button type="button" class="btn btn-outline-primary" id="goback">
+                Main Menu
+            </button>
+            <button type="button" class="btn btn-outline-danger" id="clear">Clear High Scores</button>
+
 
 
             <script src="script.js">

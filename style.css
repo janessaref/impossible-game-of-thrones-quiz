@@ -9,7 +9,8 @@ body {
 }
 
 
-#trivia {
+#trivia,
+#scoreboard {
     list-style-type: none;
 }
 
@@ -18,5 +19,4 @@ body {
 #button3,
 #button4 {
     margin-bottom: 20px;
-
 }
