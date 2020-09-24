@@ -70,12 +70,6 @@ var triviaQs = [
 ];
 
 
-
-
-// var houseBtn = startBtn;
-// var triviaBtns = document.getElementById("trivia");
-// triviaBtns.style.display= "none";
-
 // Button variables
 var startBtn = document.querySelector("#house-sigils");
 var choicesBtns = document.querySelector("#trivia");
@@ -97,10 +91,8 @@ var secondsLeft = 61;
 // Container variables
 var startMenu = document.getElementById("cardbox-start");
 var triviaBox = document.getElementById("cardbox-trivia");
-// triviaBox.style.visibility = "hidden";
 triviaBox.style.display = "none";
 var scoreBox = document.getElementById("cardbox-score");
-// scoreBox.style.visibility = "hidden";
 scoreBox.style.display = "none";
 
 // Correct/wrong variables
@@ -110,21 +102,13 @@ var correctWrong = document.querySelector("#correct-wrong");
 // Scores variables
 var highScoreBtn = document.getElementById("highscores");
 
-
-// console.log(correctAnswer)
-// triviaBox.setAttribute("class","hide");
-
-
-
 function startGame() {
-    // var houseBtn = houseHighScore();
-    // houseBtn.text = houseBtn;
-    // console.log(houseBtn);
+
+    startMenu.style.display = "none";
+    triviaBox.style.display = "block";
 
     triviaQuestions();
     startTimer();
-
-
 };
 
 
@@ -144,14 +128,28 @@ function triviaQuestions() {
     btnC.textContent = currentQuestion[2];
     btnD.textContent = currentQuestion[3];
 
+    // if (questionNumber < questionNumber.length) {
+    //     endQuiz();  
+
+    // }
 
 };
 
+// Shuffle the array of for current question choices
 function shuffle(array) {
     let shuffled = array.sort(() => Math.random() - 0.5);
     return shuffled;
 }
 
+// End of quiz function 
+function endQuiz() {
+    // clearInterval(gameTimer);
+    triviaBox.style.display = "none";
+    scoreBox.style.display = "block";
+    
+}
+
+// To begin timer function
 function startTimer() {
     var gameTimer = setInterval(function () {
         secondsLeft--;
@@ -159,36 +157,18 @@ function startTimer() {
         if (secondsLeft <= 0) {
             timerSeconds.textContent = 0;
             clearInterval(gameTimer);
-            // triviaBox.setAttribute("class", "hide");
             triviaBox.style.display = "none";
             scoreBox.style.display = "block";
-
 
         }
 
     }, 1000);
 }
 
-
-
-
+// Event listener to start game
 startBtn.addEventListener("click", startGame);
-startBtn.addEventListener("click", function () {
 
-    // var hideHouseBtn = document.getElementById("house-sigils");
-    // hideHouseBtn.style.display = "none";
-
-    // var showTriviaBtn = document.getElementById("trivia");
-    // showTriviaBtn.style.display = "";
-
-    // var hideInstructions = document.getElementById("instructions");
-    // hideInstructions.style.display="none";
-
-    startMenu.style.display = "none";
-    triviaBox.style.display = "block";
-
-
-});
+// Event listener for all answer buttons
 choicesBtns.addEventListener("click", function (event) {
 
     if (event.target.matches("button")) {
@@ -196,23 +176,25 @@ choicesBtns.addEventListener("click", function (event) {
         if (event.target.textContent === triviaQs[i]["correctA"]) {
             correctWrong.textContent = correctIncorrect[0];
             console.log(correctWrong)
-            questionNumber++;
             secondsLeft = secondsLeft + 5;
             console.log("matches");
 
         } else {
             correctWrong.textContent = correctIncorrect[1];
-            questionNumber++;
             secondsLeft = secondsLeft - 5;
 
 
         }
-        triviaQuestions();
+        questionNumber++;
+        if (questionNumber == 4) {
+            endQuiz();
+        } else {
+           triviaQuestions();
+        }
+        
 
     }
 
 })
-
-// End of quiz
 
 
