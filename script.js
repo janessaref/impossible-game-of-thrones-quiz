@@ -101,6 +101,8 @@ var correctWrong = document.querySelector("#correct-wrong");
 
 // Scores variables
 var highScoreBtn = document.getElementById("highscores");
+var finalScore = document.getElementById("score");
+
 
 function startGame() {
 
@@ -143,7 +145,6 @@ function shuffle(array) {
 
 // End of quiz function 
 function endQuiz() {
-    // clearInterval(gameTimer);
     triviaBox.style.display = "none";
     scoreBox.style.display = "block";
     
@@ -159,7 +160,12 @@ function startTimer() {
             clearInterval(gameTimer);
             triviaBox.style.display = "none";
             scoreBox.style.display = "block";
-
+        }
+        if (questionNumber == 4) {
+            clearInterval(gameTimer);
+            finalScore.textContent = secondsLeft;
+            triviaBox.style.display = "none";
+            scoreBox.style.display = "block";
         }
 
     }, 1000);
