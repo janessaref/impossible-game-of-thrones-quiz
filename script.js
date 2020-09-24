@@ -72,6 +72,7 @@ var triviaQs = [
 
 // Button variables
 var startBtn = document.querySelector("#house-sigils");
+var menuBtn = document.getElementById("goback");
 var choicesBtns = document.querySelector("#trivia");
 var btnA = document.getElementById("button1");
 var btnB = document.getElementById("button2");
@@ -102,6 +103,9 @@ var correctWrong = document.querySelector("#correct-wrong");
 // Scores variables
 var highScoreBtn = document.getElementById("highscores");
 var finalScore = document.getElementById("score");
+var submitScore = document.querySelector(".submit");
+var inputInitials = document.querySelector(".inputname");
+var scoreForm = document.querySelector("#score-form");
 
 
 function startGame() {
@@ -129,12 +133,6 @@ function triviaQuestions() {
     btnB.textContent = currentQuestion[1];
     btnC.textContent = currentQuestion[2];
     btnD.textContent = currentQuestion[3];
-
-    // if (questionNumber < questionNumber.length) {
-    //     endQuiz();  
-
-    // }
-
 };
 
 // Shuffle the array of for current question choices
@@ -147,8 +145,11 @@ function shuffle(array) {
 function endQuiz() {
     triviaBox.style.display = "none";
     scoreBox.style.display = "block";
-    
+
 }
+
+// Submit Score to scoreboard
+
 
 // To begin timer function
 function startTimer() {
@@ -195,12 +196,73 @@ choicesBtns.addEventListener("click", function (event) {
         if (questionNumber == 4) {
             endQuiz();
         } else {
-           triviaQuestions();
+            triviaQuestions();
         }
-        
+
 
     }
 
-})
+});
 
+
+
+var initialsVal = [];
+
+init();
+var scoreList = document.querySelector("#scoreboard");
+console.log(initialsVal);
+
+function renderScore() {
+    for(var j = 0; j < initialsVal.length; j++) {
+        var userScore = initialsVal[j];
+
+        var li = document.createElement("li");
+        li.textContent = userScore;
+        li.setAttribute("data-index",j);
+        scoreList.appendChild(li);
+        
+    }
+};
+
+function init() {
+
+    var storedScores = JSON.parse(localStorage.getItem("intialsVal"));
+
+    if (storedScores !== null) {
+        initialsVal = storedScores;
+    };
+    
+    renderScore();
+};
+
+
+function storeScore() {
+    localStorage.setItem("initialsVal", JSON.stringify(initialsVal));
+}
+
+// Event Listener for submit score 
+scoreForm.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    var userInput = inputInitials.value;
+
+    if (userInput === "") {
+        return;
+    }
+    initialsVal.push(userInput);
+    inputInitials.value = "";
+
+    storeScore();
+    renderScore();
+});
+
+menuBtn.addEventListener("click",function(){
+
+    startMenu.style.display = "block";
+    triviaBox.style.display = "none";
+    scoreBox.style.display = "none";
+    
+    return startGame();
+
+});
 
