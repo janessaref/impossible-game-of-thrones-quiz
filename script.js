@@ -24,7 +24,7 @@ var triviaQs = [
         choices: [
             "You've haven't changed.",
             "You look terrible.",
-            "You've aged."
+            "You've aged.",
         ],
 
         correctA: "You've got fat.",
@@ -34,9 +34,9 @@ var triviaQs = [
     {
         question: ["Who said \"Chaos isn't a pit. Chaos is a ladder.\"?"],
         choices: [
-            "Vaerys",
+            "Lord Varys",
             "Cersei Lannister",
-            "Tyrion Lannister"
+            "Tyrion Lannister",
         ],
 
         correctA: "Peter Baelish",
@@ -48,7 +48,7 @@ var triviaQs = [
         choices: [
             "A Lannister Always Pays His Debts.",
             "Unbent. Unbowed. Unbroken.",
-            "Growing Strong."
+            "Growing Strong.",
         ],
 
         correctA: "Hear Me Roar.",
@@ -61,10 +61,88 @@ var triviaQs = [
         choices: [
             "Stannis Baratheon",
             "Mance Rayder",
-            "Sir Gregor Clegane"
+            "Sir Gregor Clegane",
         ],
 
         correctA: "Beric Dondarrion",
+
+    },
+
+    {
+        question: ["Who created the Night King?"],
+
+        choices: [
+            "The Lord of Light",
+            "The Drowned God",
+            "The First Men"
+        ],
+
+        correctA: "The Children of the Forest",
+
+    },
+
+    {
+        question: ["Who did King Joffrey use as target practice for his crossbow?"],
+
+        choices: [
+            "Shae",
+            "Talisa Stark",
+            "Maester Luwin",
+        ],
+
+        correctA: "Ros",
+
+    },
+
+    {
+        question: ["Who said this: \"What do we say to the God of death? Not today.\","],
+
+        choices: [
+            "Ned Stark",
+            "Jon Snow",
+            "Arya Stark",
+        ],
+
+        correctA: "Syrio Forel",
+
+    },
+
+    {
+        question: ["What are the three names of Daenerys' dragons?"],
+
+        choices: [
+            "Drogon, Viserys and Rhaegar",
+            "Drogon, Viserys and Rhaenys",
+            "Drogon, Viserion and Aegon",
+        ],
+
+        correctA: "Drogon, Viserion and Rhaegal",
+
+    },
+
+    {
+        question: ["Where is the house of Black and White, the training temple of the Faceless Men?"],
+
+        choices: [
+            "Qarth",
+            "Mereen",
+            "No one knows",
+        ],
+
+        correctA: "Braavos",
+
+    },
+
+    {
+        question: ["What does Daenerys mean when she says \"Shekh ma shieraki anni\" to Khal Drogo?"],
+
+        choices: [
+            "'My moon and stars'",
+            "'Moon of my life'",
+            "'Sun of my life'",
+        ],
+
+        correctA: "'My sun and stars'",
 
     },
 ];
@@ -87,7 +165,8 @@ var i = 0;
 // Timer variables
 var timerEl = document.querySelector("#timer");
 var timerSeconds = document.querySelector("#seconds");
-var secondsLeft = 61;
+var secondsLeft = 60;
+timerSeconds.textContent = secondsLeft;
 
 // Container variables
 var startMenu = document.getElementById("cardbox-start");
@@ -148,8 +227,6 @@ function endQuiz() {
 
 }
 
-// Submit Score to scoreboard
-
 
 // To begin timer function
 function startTimer() {
@@ -162,14 +239,18 @@ function startTimer() {
             triviaBox.style.display = "none";
             scoreBox.style.display = "block";
         }
-        if (questionNumber == 4) {
+        if (questionNumber == 10) {
             clearInterval(gameTimer);
             finalScore.textContent = secondsLeft;
+            if (secondsLeft === 0) {
+                finalScore.textContent = "Sorry! Time is up!";
+            }
             triviaBox.style.display = "none";
             scoreBox.style.display = "block";
         }
 
     }, 1000);
+
 }
 
 // Event listener to start game
@@ -182,18 +263,20 @@ choicesBtns.addEventListener("click", function (event) {
 
         if (event.target.textContent === triviaQs[i]["correctA"]) {
             correctWrong.textContent = correctIncorrect[0];
+            correctWrong.style.color = "green";
             console.log(correctWrong)
             secondsLeft = secondsLeft + 5;
             console.log("matches");
 
         } else {
             correctWrong.textContent = correctIncorrect[1];
+            correctWrong.style.color = "red";
             secondsLeft = secondsLeft - 5;
 
 
         }
         questionNumber++;
-        if (questionNumber == 4) {
+        if (questionNumber == 10) {
             endQuiz();
         } else {
             triviaQuestions();
@@ -208,40 +291,27 @@ choicesBtns.addEventListener("click", function (event) {
 
 var initialsVal = [];
 
-init();
+// init();
 var scoreList = document.querySelector("#scoreboard");
-console.log(initialsVal);
+
 
 function renderScore() {
-    for(var j = 0; j < initialsVal.length; j++) {
+    scoreList.innerHTML = "";
+
+    for (var j = 0; j < initialsVal.length; j++) {
         var userScore = initialsVal[j];
 
         var li = document.createElement("li");
         li.textContent = userScore;
-        li.setAttribute("data-index",j);
+        // li.setAttribute("data-index", j);
         scoreList.appendChild(li);
-        
+
     }
 };
 
-function init() {
-
-    var storedScores = JSON.parse(localStorage.getItem("intialsVal"));
-
-    if (storedScores !== null) {
-        initialsVal = storedScores;
-    };
-    
-    renderScore();
-};
-
-
-function storeScore() {
-    localStorage.setItem("initialsVal", JSON.stringify(initialsVal));
-}
 
 // Event Listener for submit score 
-scoreForm.addEventListener("click", function (event) {
+submitScore.addEventListener("click", function (event) {
     event.preventDefault();
 
     var userInput = inputInitials.value;
@@ -249,20 +319,22 @@ scoreForm.addEventListener("click", function (event) {
     if (userInput === "") {
         return;
     }
-    initialsVal.push(userInput);
+    initialsVal.push(userInput + " " + secondsLeft);
     inputInitials.value = "";
-
-    storeScore();
+    
     renderScore();
+
 });
 
-menuBtn.addEventListener("click",function(){
+menuBtn.addEventListener("click", function () {
 
     startMenu.style.display = "block";
     triviaBox.style.display = "none";
     scoreBox.style.display = "none";
-    
-    return startGame();
+
+    questionNumber = 0;
+    secondsLeft = 60;
+    timerSeconds.textContent = secondsLeft;
 
 });
 
