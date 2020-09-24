@@ -16,9 +16,9 @@ GoT Quiz
     - separate button to view high scores
 */
 
+// Trivia Questions and Multiple Choice Answers
 var triviaQs = [
     {
-
         question: ["What were the first words of King Robert Baratheon to Ned Stark in the first episode of season one?"],
 
         choices: [
@@ -28,11 +28,11 @@ var triviaQs = [
         ],
 
         correctA: "You've got fat.",
-
     },
 
     {
         question: ["Who said \"Chaos isn't a pit. Chaos is a ladder.\"?"],
+
         choices: [
             "Lord Varys",
             "Cersei Lannister",
@@ -52,7 +52,6 @@ var triviaQs = [
         ],
 
         correctA: "Hear Me Roar.",
-
     },
 
     {
@@ -65,7 +64,6 @@ var triviaQs = [
         ],
 
         correctA: "Beric Dondarrion",
-
     },
 
     {
@@ -78,7 +76,6 @@ var triviaQs = [
         ],
 
         correctA: "The Children of the Forest",
-
     },
 
     {
@@ -130,7 +127,6 @@ var triviaQs = [
         ],
 
         correctA: "Braavos",
-
     },
 
     {
@@ -143,10 +139,8 @@ var triviaQs = [
         ],
 
         correctA: "'My sun and stars'",
-
     },
 ];
-
 
 // Button variables
 var startBtn = document.querySelector("#house-sigils");
@@ -188,7 +182,6 @@ var inputInitials = document.querySelector(".inputname");
 var clearScore = document.getElementById("clear");
 var scoreList = document.querySelector("#scoreboard");
 
-
 // Start the game
 function startGame() {
 
@@ -218,15 +211,13 @@ function triviaQuestions() {
 function shuffle(array) {
     let shuffled = array.sort(() => Math.random() - 0.5);
     return shuffled;
-}
+};
 
 // End of quiz function 
 function endQuiz() {
     triviaBox.style.display = "none";
     scoreBox.style.display = "block";
-
-}
-
+};
 
 // To begin timer function
 function startTimer() {
@@ -246,54 +237,42 @@ function startTimer() {
             clearInterval(gameTimer);
             triviaBox.style.display = "none";
             scoreBox.style.display = "block";
-        }
-
+        };
     }, 1000);
-
-}
+};
 
 // Event listener to start game
 startBtn.addEventListener("click", startGame);
 
 // Event listener for all answer buttons
 choicesBtns.addEventListener("click", function (event) {
-
     if (event.target.matches("button")) {
-
         if (event.target.textContent === triviaQs[i]["correctA"]) {
             correctWrong.textContent = correctIncorrect[0];
             correctWrong.style.color = "green";
             secondsLeft = secondsLeft + 5;
-
         } else {
             correctWrong.textContent = correctIncorrect[1];
             correctWrong.style.color = "red";
             secondsLeft = secondsLeft - 5;
         };
-
         questionNumber++;
         if (questionNumber == 10) {
             endQuiz();
         } else {
             triviaQuestions();
         };
-
-
     };
-
 });
-
 
 // Array for high scores
 var initialsVal = [];
 
-
-
+// Clear's the high scores 
 clearScore.addEventListener("click", function () {
     scoreList.innerHTML = "";
     initialsVal = [];
 });
-
 
 function renderScore() {
     scoreList.innerHTML = "";
@@ -326,8 +305,8 @@ submitScore.addEventListener("click", function (event) {
     inputInitials.style.display = "none";
 });
 
+// Brings you back to main menu
 menuBtn.addEventListener("click", function () {
-
     startMenu.style.display = "block";
     triviaBox.style.display = "none";
     scoreBox.style.display = "none";

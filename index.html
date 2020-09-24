@@ -22,8 +22,7 @@
                 data-target="#exampleModalCenter">View High Scores</button>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -52,7 +51,7 @@
                     Timer:
                 </span>
                 <div class="navbar-text text-white" id="seconds">0</div>
-                </div>
+            </li>
 
         </ul>
         <div class="px-4"></div>
@@ -63,23 +62,23 @@
         <div class="card-header">
             #ForTheThrone
         </div>
-        <div class="card-body" id="cardbox">
+        <div class="card-body">
             <h1 class="card-title">GAME OF THRONES QUIZ</h1>
             <p class="card-text m-5" id="instructions">Do you have what it takes to play for the iron throne? Don’t let
                 the white walkers beat you to it! This quiz is timed and for every incorrect answer, it will penalize
                 your time by 5 seconds! For every correct answer, you will get an additonal 5 seconds to your time! Your
                 time left will be your final score. To start the quiz, choose your house sigil! Good luck!</p>
-            <ul id="house-sigils">
-                <button type="button" class="btn btn-outline-success" id="start">House Stark</button>
-                <button type="button" class="btn btn-outline-success" id="start">House Lannister</button>
-                <button type="button" class="btn btn-outline-success" id="start">House Targaryen</button>
-                <button type="button" class="btn btn-outline-success" id="start">House Baratheon</button>
-                <button type="button" class="btn btn-outline-success" id="start">House Tully</button>
-                <button type="button" class="btn btn-outline-success" id="start">House Martell</button>
-                <button type="button" class="btn btn-outline-success" id="start">House Greyjoy</button>
-                <button type="button" class="btn btn-outline-success" id="start">House Tyrell</button>
-                <button type="button" class="btn btn-outline-success" id="start">House Arryn</button>
-            </ul>
+            <div id="house-sigils">
+                <button type="button" class="btn btn-outline-success">House Stark</button>
+                <button type="button" class="btn btn-outline-success">House Lannister</button>
+                <button type="button" class="btn btn-outline-success">House Targaryen</button>
+                <button type="button" class="btn btn-outline-success">House Baratheon</button>
+                <button type="button" class="btn btn-outline-success">House Tully</button>
+                <button type="button" class="btn btn-outline-success">House Martell</button>
+                <button type="button" class="btn btn-outline-success">House Greyjoy</button>
+                <button type="button" class="btn btn-outline-success">House Tyrell</button>
+                <button type="button" class="btn btn-outline-success">House Arryn</button>
+            </div>
         </div>
         <div class="card-footer p-4 text-muted">Let's go!
         </div>
@@ -90,7 +89,7 @@
         <div class="card-header">
             #ForTheThrone
         </div>
-        <div class="card-body" id="cardbox">
+        <div class="card-body">
             <h1 class="card-title" id="tq">Question 1</h1>
             <p class="card-text m-5"></p>
             <ul id="trivia">
@@ -115,7 +114,7 @@
         <div class="card-header">
             #ForTheThrone
         </div>
-        <div class="card-body" id="cardbox">
+        <div class="card-body">
             <h1 class="card-title" id="score">Score</h1>
             <p class="card-text m-5">YOUR FINAL SCORE</p>
             <ul id="scoreboard"></ul>
@@ -126,32 +125,30 @@
                     <button class="btn btn-outline-secondary submit" type="button" id="button-addon2">Submit</button>
                 </div>
             </div>
-
-
-            <!-- Main Menu Button -->
             <button type="button" class="btn btn-outline-primary" id="goback">
-                Main Menu
-            </button>
+                Main Menu</button>
             <button type="button" class="btn btn-outline-danger" id="clear">Clear High Scores</button>
+        </div>
+    </div>
 
 
 
-            <script src="script.js">
+    <script src="script.js">
 
 
-            </script>
+    </script>
 
-            <!-- Optional JavaScript -->
-            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-                crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-                integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-                crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-                integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-                crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
