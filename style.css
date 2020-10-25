@@ -6,6 +6,7 @@ body {
     max-width: 100%;
     height: auto;
     background-size: cover;
+    background-position-x: center;
     opacity: .9;
 }
 
